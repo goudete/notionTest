@@ -6,9 +6,9 @@ import axios from 'axios';
 import { AppToaster } from './components/toaster';
 
 
-const API_URL = 'https://api.notion.com/v1/pages';
-const DB_ID = '8a21fed1d335433cb34698ea206f2a75';
-const AUTH_TOKEN = 'secret_cUDXqUuZHRpGKgdrke32HqXfqY3IG6ng7kdhZip2Xk5';
+const API_URL = '';
+const DB_ID = '';
+const AUTH_TOKEN = '';
 
 function App() {
 
@@ -23,24 +23,27 @@ function App() {
       return;
     }
     const response = await axios.post(API_URL, {
-        "parent": { "database_id": `${DB_ID}` },
-        "properties": {
-          "Dog Name Suggestions": [
-            {
-              "text": {
-                "content": `${name}`
-              }
+      "parent": { "database_id": `${DB_ID}` },
+      "properties": {
+        "Dog Name Suggestions": [
+          {
+            "text": {
+              "content": `${name}`
             }
-          ]
-        },
-        "children": []
-      }, {
-        headers: {
-          'Authorization': `Bearer ${AUTH_TOKEN}`,
-          'Access-Control-Allow-Origin': '*',
-        }
-      });
-    if (response.id) {
+          }
+        ]
+      },
+      "children": []
+    }, {
+      headers: {
+        'Authorization': `Bearer ${AUTH_TOKEN}`,
+        'Content-Type': 'application/json',
+      }
+    }).catch((e) => {
+      console.log(e)
+    });
+
+    if (response?.id != null) {
       AppToaster.show({
         message: 'Successfuly Submitted!',
         intent: 'success'
@@ -56,12 +59,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <div className="content">
+          <h2>
+            Help me name my new Goldendoodle puppy!
+          </h2>
           <p>
-            Goldendoodle puppy name suggestions
+            Name Suggestions
           </p>
-
           <InputGroup
             placeholder="chango"
             onChange={ (e) => setName(e.target.value) }

@@ -42,6 +42,6 @@
   }
 }
 
-.submitButton {
-  background-color: #459665;
+.content {
+  max-width: 20em;
 }
