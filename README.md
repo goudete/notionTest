@@ -1,10 +1,12 @@
-# Getting Started with Create React App
+# Notion Take Home Excercise
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How it works and how to run
 
-## Available Scripts
+My program is a react app set up with [Create React App](https://github.com/facebook/create-react-app).
 
-In the project directory, you can run:
+It consists of an async function called `addEntry` that gets the user's input from the state (useState hook), validates it and performs an axios POST request to the 'https://api.notion.com/v1/pages' endpoint. Depending on the server's response, it either displays a success or failure message.
+
+To run the program, cd into the project and run:
 
 ### `yarn start`
 
@@ -14,57 +16,27 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Things I got stuck on and how I resolved them
 
-### `yarn build`
+There were two main things I got stuck on, getting the database id and a CORS error.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+For the database id, the guide wasn't very explicit about having to copy the link for the table, paste it in the browser and grab it from there. It says: "By copying the database ID in our browser's URL, we can now retrieve this database via the API." I figured it out by reasoning through it and then once I saw you could get a link for the specific table, the instructions made sense. From here, I tried both substrings that look like ids from the URL.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+For the CORS error, I Google the error: "Access to XMLHttpRequest at 'https://api.notion.com/v1/pages' from origin 'http://localhost:3000' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status." and took the following steps:
+1. First I tried to add a new header in the request: 'Access-Control-Allow-Origin': '*'. This didn't work either. Since I was able to successfully perform multiple requests using Postman, I realized the problem is most likely the server rejecting requests from my browser due to safety concerns. My current hypothesis: The server needs to grant my origin 'http://localhost:3000' access.
+2. So I emailed Gabri (my recruiter) and explained the issue with as much detail as I could to see if the Eng team had any feedback.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Suggestions for API Documentation
 
-### `yarn eject`
+Overall, it's looking really good. I am very impressed by how fast I started using the API. One thing I might improve (albeit small) is making certain steps like this more explicit in the steps that need to be taken:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+"By copying the database ID in our browser's URL, we can now retrieve this database via the API."
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+⇒ "Hover over the table and click on the three dot icon. Copy the link and paste it in your browser. Copy the database ID and ..."
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## List of open source libraries I chose to use
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+React for building the web UI
+Axios for networking
+Blueprint for UI components (InputGroup for user input and Toast for displaying feedback)
