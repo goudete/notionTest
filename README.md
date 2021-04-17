@@ -37,7 +37,7 @@ Overall, it's looking really good. I am very impressed by how fast I started usi
 
 ## List of open source libraries I chose to use
 
-React for building the web UI. 
-Axios for networking. 
-Blueprint for UI components (InputGroup for user input and Toast for displaying feedback). 
+- React for building the web UI
+- Axios for networking
+- Blueprint for UI components (InputGroup for user input and Toast for displaying feedback)
 
