@@ -6,7 +6,11 @@ My program is a react app set up with [Create React App](https://github.com/face
 
 It consists of an async function called `addEntry` that gets the user's input from the state (useState hook), validates it and performs an axios POST request to the 'https://api.notion.com/v1/pages' endpoint. Depending on the server's response, it either displays a success or failure message.
 
-To run the program, cd into the project and run:
+To run the program, first install its dependencies by running:
+
+### `yarn install`
+
+Then run:
 
 ### `yarn start`
 
