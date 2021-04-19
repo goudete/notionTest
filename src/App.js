@@ -56,7 +56,7 @@ function App() {
             Name Suggestions
           </p>
           <InputGroup
-            placeholder="chango"
+            placeholder="puppy name"
             onChange={ (e) => setName(e.target.value) }
             rightElement={<Button rightIcon="arrow-right" intent="success" text="Submit" onClick={addEntry} />}
             large
