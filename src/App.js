@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { InputGroup, Button } from "@blueprintjs/core";
 import axios from 'axios';
 import { AppToaster } from './components/toaster';
 
+const API_URL = 'http://localhost:8080/newEntry';
 
-const API_URL = '';
-const DB_ID = '';
-const AUTH_TOKEN = '';
 
 function App() {
 
@@ -22,33 +19,25 @@ function App() {
       })
       return;
     }
-    const response = await axios.post(API_URL, {
-      "parent": { "database_id": `${DB_ID}` },
-      "properties": {
-        "Dog Name Suggestions": [
-          {
-            "text": {
-              "content": `${name}`
-            }
-          }
-        ]
-      },
-      "children": []
-    }, {
-      headers: {
-        'Authorization': `Bearer ${AUTH_TOKEN}`,
-        'Content-Type': 'application/json',
-      }
-    }).catch((e) => {
-      console.log(e)
-    });
 
-    if (response?.id != null) {
-      AppToaster.show({
-        message: 'Successfuly Submitted!',
-        intent: 'success'
-      })
-    } else {
+    try {
+      const response = await axios.post(API_URL, {
+        nameSuggestion: name
+      });
+
+      if (response?.data?.message != null) {
+        AppToaster.show({
+          message: 'Successfuly Submitted!',
+          intent: 'success'
+        })
+      } else {
+        AppToaster.show({
+          message: 'Error in request',
+          intent: 'danger'
+        })
+      }
+
+    } catch (error) {
       AppToaster.show({
         message: 'Error in request',
         intent: 'danger'
