@@ -7,7 +7,7 @@ My solution consists of a react frontend and an express server as a backend. The
 ### Front end
 It consists of an async function called `addEntry` that gets the user's input from the state (useState hook), validates it and performs an axios POST request to the express server at 'http://localhost:8080/newEntry'. Depending on the server's response, it either displays a success or failure message.
 
-To run the program, first install its dependencies by running:
+To run the program, first cd into the 'notion' directory install its dependencies by running:
 
 ### `yarn install`
 
@@ -24,7 +24,7 @@ You will also see any lint errors in the console.
 ### Backend
 The express server consists of one endpoint called `newEntry`, located in the `routes` directory. In its body, it accepts a parameter `nameSuggestion` which is the user's input. The endpoint's sole purpose is to call Notion's 'https://api.notion.com/v1/pages' endpoint. Depending on the response, it returns a `200` if the call was successful or a `500` if unsuccessful.
 
-To run the server, first install its dependencies by running:
+To run the server, first cd into the 'nodeServer' directory and install its dependencies by running:
 
 ### `npm install`
 
